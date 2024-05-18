@@ -1,0 +1,196 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+#whole_system {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /*border: 1px solid blue;*/
+}
+
+.chart_item {
+  width: 20%;
+  flex-grow: 0;
+  /*border: 1px solid red;*/
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chart_items {
+  width: 35%;
+  flex-grow: 0;
+  /*border: 1px solid red;*/
+  /*background-color: burlywood;*/
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chart_items11 {
+  width: 30%;
+  flex-grow: 0;
+  /*border: 1px solid red;*/
+  /*background-color: burlywood;*/
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chart_title {
+  height: 25px;
+  flex-grow: 0;
+  width: 60%;
+  background: linear-gradient(to right, #0D3DB6 0%, #052678 50%, #0C2542 100%); /* 标准的语法（必须放在最后） */
+  color: white;
+  font-size: 10px;
+  /*border-left: 20px;*/
+  /*border: 1px solid blue;*/
+  margin-left: 15px;
+}
+
+.chart_line {
+  /*width: 50%;*/
+  /*height: 1px;*/
+  /*border-top: solid #ACC0D8 1px;*/
+  margin-top: 2px;
+  margin-left: 15px;
+  width: 60%;
+  background: linear-gradient(to right, #707F90, #0B2542); /* 标准的语法（必须放在最后） */
+  height: 1px;
+}
+
+.chart_text {
+  margin-top: 10px;
+  margin-left: 15px;
+  font-family: 微软雅黑;
+  color: #bbff00;
+  font-size: 15px;
+  height: 20px;
+  text-align: left;
+}
+
+.chart_digital {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 15px;
+  font-family: 微软雅黑;
+  color: white;
+  font-size: 30px;
+  height: 30px;
+  text-align: left;
+}
+
+.chart_chart {
+  margin: 0;
+  flex: 1;
+}
+
+.link-top {
+  width: 50%;
+  height: 1px;
+  border-top: solid #ACC0D8 1px;
+}
+
+.title-area {
+  font-family: 微软雅黑;
+  color: white;
+  border-top: 30px;
+  font-size: 40px;
+  height: 70px;
+  /*border: 1px solid yellow;*/
+  text-align: center;
+  background-color: #0B2541;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+}
+
+.middle-area {
+  font-family: 微软雅黑;
+  font-size: 40px;
+  height: 40%;
+  /*flex-grow: 1;*/
+  /*border: 1px solid red;*/
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.bottom-area {
+  font-family: 微软雅黑;
+  font-size: 40px;
+  height: 50%;
+  /*flex-grow: 2;*/
+  /*border: 1px solid red;*/
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.map_item {
+  width: 40%;
+  flex-grow: 0;
+  /*border: 1px solid red;*/
+}
+
+.my_bottom {
+  width: 40%;
+  flex-grow: 0;
+}
+
+.bottom_left_item {
+  width: 50%;
+  flex-grow: 0;
+  /*border: 1px solid red;*/
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.bottom_right_item {
+  width: 50%;
+  flex-grow: 0;
+  /*border: 1px solid red;*/
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.bottom_right_item11 {
+  width: 40%;
+  flex-grow: 0;
+  /*border: 1px solid red;*/
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chart_item_bottom {
+  height: 100%;
+  width: 100%;
+  flex-grow: 0;
+  /*border: 1px solid red;*/
+  display: flex;
+  flex-direction: column;
+}
+
+
+.chart-container {
+  /*position: relative;*/
+  /*overflow: hidden;*/
+  display: flex;
+  flex-direction: column;
+  /*width: 50%;*/
+  height: 100%;
+  justify-content: space-between; /*两端对其 */
+  align-items: center; /* 居中*/
+
+}
