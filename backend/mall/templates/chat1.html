@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>聊天1</title>
+</head>
+<body>
+<h1>User1 Chat</h1>
+<form action="" onsubmit="sendMessage(event)">
+    <input type="text" id="messageText" autocomplete="off"/>
+    <button>Send</button>
+</form>
+
+<form action="" onsubmit="sendOtherMessage(event)">
+    <input type="text" id="messageOther" autocomplete="off"/>
+    <button>Send Other</button>
+</form>
+
+<ul id='messages'>
+</ul>
+
+<script>
+
+    let ws = new WebSocket("ws://127.0.0.1:8088/ws/user1");
+
+    ws.onmessage = function (event) {
+        let messages = document.getElementById('messages')
+        let message = document.createElement('li');
+        let receiveJson = JSON.parse(event.data);
+        // 创建时间节点并设置样式
+        let timeNode = document.createElement('span');
+        timeNode.style.fontSize = 'smaller'; // 设置小字体样式
+        let timeContent = document.createTextNode(`[${receiveJson.time}]-`);
+        timeNode.appendChild(timeContent);
+        // 创建用户和消息内容节点
+        let contentNode = document.createElement('span');
+        let content = document.createTextNode(`${receiveJson.user}: ${receiveJson.message}`);
+        contentNode.appendChild(content);
+
+        message.appendChild(timeNode);
+        message.appendChild(contentNode);
+
+        messages.appendChild(message)
+    };
+
+    function sendMessage(event) {
+        let input = document.getElementById("messageText");
+        let message = {message: input.value, user: "user1"};
+        let messageJson = JSON.stringify(message);
+
+        ws.send(messageJson);
+        input.value = '';
+        event.preventDefault()
+    }
+
+    function sendOtherMessage(event) {
+        let input = document.getElementById("messageOther");
+        let message = {message: input.value, user: "user1", send_user: "user2"};
+        let messageJson = JSON.stringify(message);
+
+        ws.send(messageJson);
+        input.value = '';
+        event.preventDefault()
+    }
+</script>
+
+</body>
+</html>
+

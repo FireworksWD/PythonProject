@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket Example</title>
+</head>
+<body>
+    <input type="text" id="messageInput" placeholder="Enter message">
+    <button onclick="sendMessage()">Send Message</button>
+    <ul id="messageList"></ul>
+
+    <script>
+        var socket = new WebSocket('ws://localhost:8088/ws/xiaoming');
+
+        socket.onopen = function(event) {
+            console.log('WebSocket连接已建立');
+        };
+
+        socket.onmessage = function(event) {
+            var receivedData = event.data;
+            var messageList = document.getElementById('messageList');
+            var li = document.createElement('li');
+            li.textContent = receivedData;
+            messageList.appendChild(li);
+        };
+
+        socket.onclose = function(event) {
+            console.log('WebSocket连接已关闭');
+        };
+
+        function sendMessage() {
+            var messageInput = document.getElementById('messageInput');
+            var message = messageInput.value;
+            socket.send(message);
+            messageInput.value = '';
+        }
+    </script>
+</body>
+</html>
