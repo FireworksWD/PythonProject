@@ -41,10 +41,10 @@ httpInstance.interceptors.response.use(
       return res
     } else if (res.data.code === 500) {
         console.log(res.data)
-      ElMessage({
-        type: 'warning',
-        message: res.data?.msg || '请先登录'
-      })
+      // ElMessage({
+      //   type: 'warning',
+      //   message: res.data?.msg || ''
+      // })
       // setTimeout(() => {
       //   router.push('/login')
       // }, 1000)

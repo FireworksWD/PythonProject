@@ -21,7 +21,7 @@ const userStore = useUserStore()
 let ws = new WebSocket('ws://localhost:8088/ws/' + userStore.user.username)
 onMounted(() => {
   if(userStore.user.username===undefined){
-    ElMessage.warning('请先登录!!')
+    // ElMessage.warning('请先登录!!')
     setTimeout(() => {
       router.push('/login')
     }, 1000)
