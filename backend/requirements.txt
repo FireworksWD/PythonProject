@@ -18,3 +18,8 @@ django_redis==5.2.0
 openpyxl==3.0.10
 psutil==5.9.1
 daphne==4.0.0
+pillow==11.1.0
+django-cors-headers==4.7.0
+channels==4.2.0
+loguru==0.7.3
+unicorn==2.1.2
