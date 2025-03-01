@@ -114,14 +114,15 @@ CREATE TABLE IF NOT EXISTS `fuadmin`.`mall_cart`(
     `shop_price` decimal(10,2) NOT NULL,
     `shop_name` varchar(128) NOT NULL,
     `username` varchar(150) NOT NULL,
-    `create_time` timestamp DEFAULT (CURRENT_TIMESTAMP) COMMENT '����ʱ��',
+    `create_time` timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `product_num` int NOT NULL,
     `img_url` varchar(100) NULL,
-    PRIMARY KEY  (`id` ),
-    UNIQUE KEY `shop_name` (`shop_name` )
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ;
+    PRIMARY KEY  (`id`),
+    UNIQUE KEY `shop_name` (`shop_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO `fuadmin`.`mall_cart`(`id`,`user_id`,`shop_id`,`status`,`shop_price`,`shop_name`,`username`,`create_time`,`product_num`,`img_url`) VALUES (45, 4, 42, '0', 198.00, '暖风机取暖器家用节能省电石墨烯电加热冬天暖气办公室浴室烤火炉', 'test', '2024-4-16 21:17:8.', 1, 'images/20240314/20240314161835448087_42.jpg');
+INSERT INTO `fuadmin`.`mall_cart`(`id`,`user_id`,`shop_id`,`status`,`shop_price`,`shop_name`,`username`,`create_time`,`product_num`,`img_url`)
+VALUES (45, 4, 42, '0', 198.00, '暖风机取暖器家用节能省电石墨烯电加热冬天暖气办公室浴室烤火炉', 'test', '2024-4-16 21:17:8', 1, 'images/20240314/20240314161835448087_42.jpg');
 
 
 
