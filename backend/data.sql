@@ -56,3 +56,390 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2024-03-14 16:32:18
+
+
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : localhost8.0
+ Source Server Type    : MySQL
+ Source Server Version : 80012
+ Source Host           : localhost:3306
+ Source Schema         : fuadmin
+
+ Target Server Type    : MySQL
+ Target Server Version : 80012
+ File Encoding         : 65001
+
+ Date: 01/03/2025 17:00:36
+*/
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for mall_address
+-- ----------------------------
+DROP TABLE IF EXISTS `mall_address`;
+CREATE TABLE `mall_address`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `contact_number` varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `delivery_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `detailed_address` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+  `is_default` int(11) NOT NULL,
+  `create_time` datetime(6) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of mall_address
+-- ----------------------------
+INSERT INTO `mall_address` VALUES (1, '霍建华', '1008611', '北京市/市辖区/朝阳区', '北京大学', 0, '2024-03-14 17:42:07.871891', 16);
+INSERT INTO `mall_address` VALUES (2, '胡歌', '123456', '上海市/市辖区/黄浦区', '清华大学', 1, '2024-03-14 18:02:16.342295', 16);
+INSERT INTO `mall_address` VALUES (3, '赵丽颖', '10086', '天津市/市辖区/河西区', '麻省理工大学', 1, '2024-04-16 21:11:09.329409', 4);
+INSERT INTO `mall_address` VALUES (4, '童锦程', '110', '浙江省/杭州市/西湖区', '印度理工大学', 0, '2024-04-16 21:11:54.482818', 4);
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+
+DROP TABLE IF EXISTS `fuadmin`.`mall_cart`;
+
+CREATE TABLE IF NOT EXISTS `fuadmin`.`mall_cart`(
+    `id` bigint NOT NULL AUTO_INCREMENT,
+    `user_id` int NOT NULL,
+    `shop_id` int NOT NULL,
+    `status` varchar(32) NOT NULL,
+    `shop_price` decimal(10,2) NOT NULL,
+    `shop_name` varchar(128) NOT NULL,
+    `username` varchar(150) NOT NULL,
+    `create_time` timestamp DEFAULT (CURRENT_TIMESTAMP) COMMENT '����ʱ��',
+    `product_num` int NOT NULL,
+    `img_url` varchar(100) NULL,
+    PRIMARY KEY  (`id` ),
+    UNIQUE KEY `shop_name` (`shop_name` )
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ;
+
+INSERT INTO `fuadmin`.`mall_cart`(`id`,`user_id`,`shop_id`,`status`,`shop_price`,`shop_name`,`username`,`create_time`,`product_num`,`img_url`) VALUES (45, 4, 42, '0', 198.00, '暖风机取暖器家用节能省电石墨烯电加热冬天暖气办公室浴室烤火炉', 'test', '2024-4-16 21:17:8.', 1, 'images/20240314/20240314161835448087_42.jpg');
+
+
+
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : localhost8.0
+ Source Server Type    : MySQL
+ Source Server Version : 80012
+ Source Host           : localhost:3306
+ Source Schema         : fuadmin
+
+ Target Server Type    : MySQL
+ Target Server Version : 80012
+ File Encoding         : 65001
+
+ Date: 01/03/2025 17:00:53
+*/
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for mall_category
+-- ----------------------------
+DROP TABLE IF EXISTS `mall_category`;
+CREATE TABLE `mall_category`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `categoryName` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `create_time` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `categoryName`(`categoryName` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of mall_category
+-- ----------------------------
+INSERT INTO `mall_category` VALUES (1, '制冷电器', '2024-03-07 14:42:46.000000');
+INSERT INTO `mall_category` VALUES (2, '空调器', '2024-03-07 14:42:56.000000');
+INSERT INTO `mall_category` VALUES (3, '清洁电器', '2024-03-07 14:43:07.000000');
+INSERT INTO `mall_category` VALUES (4, '厨房电器', '2024-03-07 14:43:16.000000');
+INSERT INTO `mall_category` VALUES (5, '电暖器具', '2024-03-07 14:43:25.000000');
+INSERT INTO `mall_category` VALUES (6, '整容保健电器', '2024-03-07 14:43:38.000000');
+INSERT INTO `mall_category` VALUES (7, '声像电器', '2024-03-07 14:43:52.000000');
+INSERT INTO `mall_category` VALUES (8, '其他电器', '2024-03-07 14:44:01.000000');
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+
+
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : localhost8.0
+ Source Server Type    : MySQL
+ Source Server Version : 80012
+ Source Host           : localhost:3306
+ Source Schema         : fuadmin
+
+ Target Server Type    : MySQL
+ Target Server Version : 80012
+ File Encoding         : 65001
+
+ Date: 01/03/2025 17:01:02
+*/
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for mall_hit_product
+-- ----------------------------
+DROP TABLE IF EXISTS `mall_hit_product`;
+CREATE TABLE `mall_hit_product`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `pid` int(11) NOT NULL,
+  `product` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `hit` int(11) NOT NULL,
+  `create_time` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of mall_hit_product
+-- ----------------------------
+INSERT INTO `mall_hit_product` VALUES (1, 50, '笔记本电脑小音响台式机桌面USB多媒体小音箱办公室迷超重低音炮', 12, '2024-03-16 17:04:10.061040');
+INSERT INTO `mall_hit_product` VALUES (2, 49, 'Divoom点音蓝牙音箱小型家庭KTV麦克风小魔女k歌音响女唱歌话筒', 7, '2024-03-16 17:04:28.902342');
+INSERT INTO `mall_hit_product` VALUES (3, 48, 'Play 00:05 00:59   艾丁新款共振音箱远程播放控制蓝牙震动发声骨传导音响APP遥控U盘', 5, '2024-03-16 17:04:34.534484');
+INSERT INTO `mall_hit_product` VALUES (4, 46, '虹润配电器模拟量输出4-20mA隔离器一进二出分配信号隔离模块M23', 9, '2024-03-16 17:04:45.980827');
+INSERT INTO `mall_hit_product` VALUES (5, 41, '意大利水暖取暖器对流式墙暖卧室电暖气片壁挂式暖风机水电暖器', 8, '2024-03-16 17:04:51.844789');
+INSERT INTO `mall_hit_product` VALUES (6, 36, '电饭煲家用1一2人多功能蒸煮两用迷你小型一人单小电饭锅煮饭锅', 3, '2024-03-16 17:04:57.981916');
+INSERT INTO `mall_hit_product` VALUES (7, 31, '特价万利达双层防烫烧水壶不锈钢全自动断电保温泡茶煮电热开水壶', 1, '2024-03-16 17:05:01.338641');
+INSERT INTO `mall_hit_product` VALUES (8, 33, '扬子蜂窝电炒锅多功能家用电热锅蒸煮一体式炒菜不粘电锅电煮锅', 1, '2024-03-16 17:05:16.623713');
+INSERT INTO `mall_hit_product` VALUES (9, 32, '正品半球3500W大功率电磁炉家用 爆炒防水触摸火锅多功能套装炉灶', 3, '2024-03-16 17:05:19.861438');
+INSERT INTO `mall_hit_product` VALUES (10, 27, '康佳空调扇制冷风扇加水冷风机冷气扇家用宿舍神器移动小型空调扇', 2, '2024-03-16 17:05:24.470290');
+INSERT INTO `mall_hit_product` VALUES (11, 30, '好太太双电机抽油烟机家用厨房大吸力排油机自清洗小型侧吸油烟机', 3, '2024-03-16 17:05:30.497464');
+INSERT INTO `mall_hit_product` VALUES (12, 47, '家用电饭锅1-2人多功能3L4迷你小型5-6人智能煮饭学生宿舍电饭煲', 3, '2024-03-16 17:12:16.571614');
+INSERT INTO `mall_hit_product` VALUES (13, 45, '围炉煮茶烧烤火炉子聚全套装工器具桌炭火盆户外家庭用室内冬天日', 4, '2024-03-17 11:47:05.857534');
+INSERT INTO `mall_hit_product` VALUES (14, 52, '拜格 锅铲套装不锈钢铲勺家用炒菜铲子汤勺打蛋器削皮刀厨具套装 厨具六件套', 14, '2024-03-19 13:55:52.285463');
+INSERT INTO `mall_hit_product` VALUES (15, 53, '拜格刀具套装菜刀菜板家用不锈钢切片刀斩骨刀水果刀剪刀全套套刀组合 刀具6件套+木纹pp刀座', 14, '2024-03-19 14:01:23.704476');
+INSERT INTO `mall_hit_product` VALUES (16, 1, '8/10kg洗衣机全自动家用租房小型波轮大容量带烘干洗烘一体12公斤', 3, '2024-03-21 16:16:01.045921');
+INSERT INTO `mall_hit_product` VALUES (17, 54, '优赏水果刀家用案板套装宿舍便携小刀切菜刀和菜板组合刀具辅食厨房 菜刀+水果刀+瓜刨+菜板4件套', 17, '2024-04-12 12:24:26.801743');
+INSERT INTO `mall_hit_product` VALUES (18, 51, '维艾（Newair）玻璃油壶调料盒油瓶盐罐调味瓶调料瓶调料罐调味罐酱油瓶8件套', 2, '2024-04-12 13:26:00.579634');
+INSERT INTO `mall_hit_product` VALUES (19, 40, '半球抽油烟机大吸力小型老式厨房家用租房抽烟机吸油畑姻老款排', 2, '2024-04-12 13:26:10.364143');
+INSERT INTO `mall_hit_product` VALUES (20, 4, '扬子洗衣机全自动家用波轮洗脱一体洗衣机小型出租房用宿舍10公斤', 1, '2024-04-15 21:50:30.315981');
+INSERT INTO `mall_hit_product` VALUES (21, 22, '空调扇移动小空调家用静音制冷小空调不加水卧室小型一体机电风扇', 2, '2024-04-16 13:09:54.253199');
+INSERT INTO `mall_hit_product` VALUES (22, 6, '内衣裤折叠洗衣机迷你小型自动婴儿洗衣机宿舍专用洗袜子神器便携', 2, '2024-04-16 13:10:07.759919');
+INSERT INTO `mall_hit_product` VALUES (23, 5, '中国扬子电器出品洗衣机全自动家用10KG小型出租房屋宿舍洗脱一体', 2, '2024-04-16 21:13:11.154049');
+INSERT INTO `mall_hit_product` VALUES (24, 42, '暖风机取暖器家用节能省电石墨烯电加热冬天暖气办公室浴室烤火炉', 4, '2024-04-16 21:15:51.394891');
+INSERT INTO `mall_hit_product` VALUES (25, 37, '抽烟机家用厨房大吸力农村抽油烟机商用强力柴火灶土灶用吸油机', 2, '2024-04-16 21:15:54.552285');
+INSERT INTO `mall_hit_product` VALUES (26, 26, '奥克斯空调大1/1.5匹p一三级变频壁挂机式2/3匹p冷暖省电官方旗舰', 2, '2024-04-16 21:18:44.252060');
+INSERT INTO `mall_hit_product` VALUES (27, 14, '智能数显仪表4-20ma导轨壁挂式数字显示温度压力水位液位控制DN10', 4, '2024-04-16 21:18:58.427828');
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+
+
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : localhost8.0
+ Source Server Type    : MySQL
+ Source Server Version : 80012
+ Source Host           : localhost:3306
+ Source Schema         : fuadmin
+
+ Target Server Type    : MySQL
+ Target Server Version : 80012
+ File Encoding         : 65001
+
+ Date: 01/03/2025 17:01:12
+*/
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for mall_keyword
+-- ----------------------------
+DROP TABLE IF EXISTS `mall_keyword`;
+CREATE TABLE `mall_keyword`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `keyword` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `num` int(11) NOT NULL,
+  `create_time` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of mall_keyword
+-- ----------------------------
+INSERT INTO `mall_keyword` VALUES (1, '意大利', 10, '2024-03-16 17:08:48.561375');
+INSERT INTO `mall_keyword` VALUES (2, '正品', 12, '2024-03-16 17:09:09.480269');
+INSERT INTO `mall_keyword` VALUES (3, '半球', 10, '2024-03-16 17:09:22.714019');
+INSERT INTO `mall_keyword` VALUES (4, '油烟', 12, '2024-03-16 17:09:30.625385');
+INSERT INTO `mall_keyword` VALUES (5, '免费', 1, '2024-03-16 17:09:41.774545');
+INSERT INTO `mall_keyword` VALUES (6, '自动', 4, '2024-03-16 17:09:47.799480');
+INSERT INTO `mall_keyword` VALUES (7, '万达', 1, '2024-03-16 17:09:53.726954');
+INSERT INTO `mall_keyword` VALUES (8, '特价', 8, '2024-03-16 17:09:58.133382');
+INSERT INTO `mall_keyword` VALUES (9, '万', 1, '2024-03-16 17:10:08.741388');
+INSERT INTO `mall_keyword` VALUES (10, '电热', 9, '2024-03-16 17:10:14.352048');
+INSERT INTO `mall_keyword` VALUES (11, '扬子蜂', 8, '2024-03-16 17:10:25.608998');
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+
+
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : localhost8.0
+ Source Server Type    : MySQL
+ Source Server Version : 80012
+ Source Host           : localhost:3306
+ Source Schema         : fuadmin
+
+ Target Server Type    : MySQL
+ Target Server Version : 80012
+ File Encoding         : 65001
+
+ Date: 01/03/2025 17:01:19
+*/
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for mall_msg
+-- ----------------------------
+DROP TABLE IF EXISTS `mall_msg`;
+CREATE TABLE `mall_msg`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL,
+  `username` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `dateTime` varchar(256) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `text` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `read_state` int(11) NOT NULL,
+  `receive_user` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `img` varchar(256) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of mall_msg
+-- ----------------------------
+INSERT INTO `mall_msg` VALUES (1, 16, 'test55', '1710410993369', '在吗？', 0, 'customer', 'http://localhost:8088/media/images/20240325/20240325113431527499_2.jpg');
+INSERT INTO `mall_msg` VALUES (2, 17, 'customer', '1710411312627', '在的亲!', 0, 'test55', 'http://localhost:8088/media/images/customer.png');
+INSERT INTO `mall_msg` VALUES (3, 16, 'test55', '1711084132376', 'hi', 0, 'customer', 'http://localhost:8088/media/images/20240325/20240325113431527499_2.jpg');
+INSERT INTO `mall_msg` VALUES (4, 16, 'test55', '1713110531243', 'lalala', 0, 'customer1', 'http://localhost:8088/media/images/20240325/20240325113431527499_2.jpg');
+INSERT INTO `mall_msg` VALUES (5, 4, 'test', '1713110616679', 'heiheihei', 0, 'customer1', 'http://localhost:8088/media/images/20240325/20240325113351146122_R-C_(1).jpg');
+INSERT INTO `mall_msg` VALUES (6, 4, 'test', '1713110643094', 'shide', 0, 'customer', 'http://localhost:8088/media/images/20240325/20240325113351146122_R-C_(1).jpg');
+INSERT INTO `mall_msg` VALUES (7, 23, 'customer1', '1713111292555', 'ok', 0, 'test', 'http://localhost:8088/media/images/customer.png');
+INSERT INTO `mall_msg` VALUES (8, 17, 'customer', '1713111300447', 'sf', 0, 'test', 'http://localhost:8088/media/images/customer.png');
+INSERT INTO `mall_msg` VALUES (9, 23, 'customer1', '1713111323951', 'lk', 0, 'test55', 'http://localhost:8088/media/images/customer.png');
+INSERT INTO `mall_msg` VALUES (10, 17, 'customer', '1713341836548', 'ee', 0, 'test55', 'http://localhost:8088/media/images/customer.png');
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : localhost8.0
+ Source Server Type    : MySQL
+ Source Server Version : 80012
+ Source Host           : localhost:3306
+ Source Schema         : fuadmin
+
+ Target Server Type    : MySQL
+ Target Server Version : 80012
+ File Encoding         : 65001
+
+ Date: 01/03/2025 17:14:47
+*/
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for mall_order
+-- ----------------------------
+DROP TABLE IF EXISTS `mall_order`;
+CREATE TABLE `mall_order`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `order_number` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `username` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `total_amount` decimal(10, 2) NOT NULL,
+  `payment_amount` decimal(10, 2) NOT NULL,
+  `payment_status` int(11) NOT NULL,
+  `transaction_status` int(11) NOT NULL,
+  `recipient_phone` varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `recipient_address` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+  `create_time` datetime(6) NOT NULL,
+  `checkout_time` datetime(6) NULL DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of mall_order
+-- ----------------------------
+INSERT INTO `mall_order` VALUES (2, '1712899585', '霍建华', 4389.70, 4389.70, 1, 1, '1008611', '北京市/市辖区/朝阳区/清华大学', '2024-04-12 13:26:25.879227', '2024-04-12 13:26:25.879227', 16);
+INSERT INTO `mall_order` VALUES (3, '1713244165', '霍建华', 1233.90, 1233.90, 1, 0, '1008611', '北京市/市辖区/朝阳区/清华大学', '2024-04-16 13:09:25.121361', '2024-04-16 13:09:25.121361', 16);
+INSERT INTO `mall_order` VALUES (4, '1713271554', '霍建华', 2493.90, 2493.90, 0, 2, '1008611', '北京市/市辖区/朝阳区/清华大学', '2024-04-13 20:45:54.753000', '2024-04-16 20:45:54.753187', 16);
+INSERT INTO `mall_order` VALUES (5, '1713273195', '童锦程', 1913.70, 1913.70, 1, 0, '110', '浙江省/杭州市/西湖区/清华大学', '2024-04-15 21:13:15.976000', '2024-04-16 21:13:15.976526', 4);
+INSERT INTO `mall_order` VALUES (6, '1713273346', '赵丽颖', 1171.70, 1171.70, 1, 0, '10086', '天津市/市辖区/河西区/清华大学', '2024-04-14 21:15:46.471000', '2024-04-16 21:15:46.471749', 4);
+INSERT INTO `mall_order` VALUES (7, '1713273410', '赵丽颖', 2297.00, 2297.00, 1, 0, '10086', '天津市/市辖区/河西区/清华大学', '2024-04-10 21:16:50.873000', '2024-04-16 21:16:50.873110', 4);
+INSERT INTO `mall_order` VALUES (8, '1713273424', '赵丽颖', 8960.00, 8960.00, 1, 0, '10086', '天津市/市辖区/河西区/清华大学', '2024-04-09 21:17:04.333000', '2024-04-16 21:17:04.333095', 4);
+INSERT INTO `mall_order` VALUES (9, '1713273555', '胡歌', 3729.75, 3729.75, 1, 0, '123456', '上海市/市辖区/黄浦区/北京大学', '2024-04-11 21:19:15.657000', '2024-04-16 21:19:15.656218', 16);
+INSERT INTO `mall_order` VALUES (10, '1713341674', '胡歌', 276.89, 276.89, 1, 1, '123456', '上海市/市辖区/黄浦区/北京大学', '2024-04-17 16:14:34.207678', '2024-04-17 16:14:34.207678', 16);
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+
+DROP TABLE IF EXISTS `fuadmin`.`mall_order_detail`;
+
+CREATE TABLE IF NOT EXISTS `fuadmin`.`mall_order_detail`(
+    `id` bigint NOT NULL AUTO_INCREMENT,
+    `img_url` varchar(100) NULL,
+    `product_num` int NOT NULL,
+    `shop_price` decimal(10,2) NOT NULL,
+    `shop_name` varchar(128) NOT NULL,
+    `user_id` int NOT NULL,
+    `order_number` varchar(20) NOT NULL,
+    `is_delete` int NOT NULL,
+    `create_time` datetime(6) NOT NULL,
+    `shop_id` int NOT NULL,
+    PRIMARY KEY  (`id` )
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ;
+
+
+
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (1, 'images/20240319/20240319135524635240_52.jpg', 1, 29.89, '拜格 锅铲套装不锈钢铲勺家用炒菜铲子汤勺打蛋器削皮刀厨具套装 厨具六件套', 16, '1712897733', 1, '2024-4-12 12:55:33.258334', 52);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (2, 'images/20240319/20240319135638903928_53.jpg', 1, 34.11, '拜格刀具套装 菜刀菜板家用不锈钢切片刀斩骨刀水果刀剪刀全套套刀组合 刀具6件套+木纹pp刀座', 16, '1712897733', 1, '2024-4-12 12:55:33.258334', 53);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (3, 'images/20240319/20240319140432438292_54.jpg', 1, 25.90, '优赏水果刀家 用案板套装宿舍便携小刀切菜刀和菜板组合刀具辅食厨房 菜刀+水果刀+瓜刨+菜板4件套', 16, '1712897733', 1, '2024-4-12 12:55:33.258334', 54);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (4, 'images/20240314/20240314160042598790_30.jpg', 3, 218.00, '好太太双电机抽油烟机家用厨房大吸力排油机自清洗小型侧吸油烟机', 16, '1712899585', 0, '2024-4-12 13:26:25.876115', 30);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (5, 'images/20240314/20240314161755274228_41.jpg', 1, 2880.00, '意大利水暖 取暖器对流式墙暖卧室电暖气片壁挂式暖风机水电暖器', 16, '1712899585', 0, '2024-4-12 13:26:25.876115', 41);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (6, 'images/20240314/20240314161658984896_40.jpg', 2, 126.00, '半球抽油烟机大吸力小型老式厨房家用租房抽烟机吸油畑姻老款排', 16, '1712899585', 0, '2024-4-12 13:26:25.876115', 40);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (7, 'images/20240314/20240314162155450433_46.jpg', 3, 160.00, '虹润配电器模拟量输出4-20mA隔离器一进二出分配信号隔离模块M23', 16, '1712899585', 0, '2024-4-12 13:26:25.876115', 46);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (8, 'images/20240319/20240319135402453272_51jpg.jpg', 3, 29.90, '维艾（Newair）玻璃油壶调料盒油瓶盐罐调味瓶调料瓶调料罐调味罐酱油瓶8件套', 16, '1712899585', 0, '2024-4-12 13:26:25.876115', 51);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (9, 'images/20240314/20240314162511372464_50.jpg', 1, 34.00, '笔记本电脑小 音响台式机桌面USB多媒体小音箱办公室迷超重低音炮', 16, '1712899585', 0, '2024-4-12 13:26:25.876115', 50);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (44, 'images/20240314/20240314162511372464_50.jpg', 1, 34.00, '笔记本电脑小音响台式机桌面USB多媒体小音箱办公室迷超重低音炮', 16, '1713244165', 0, '2024-4-16 13:9:25.119356', 50);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (45, 'images/20240319/20240319135524635240_52.jpg', 1, 29.89, '拜格 锅铲套 装不锈钢铲勺家用炒菜铲子汤勺打蛋器削皮刀厨具套装 厨具六件套', 16, '1713244165', 0, '2024-4-16 13:9:25.119356', 52);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (46, 'images/20240319/20240319135638903928_53.jpg', 1, 34.11, '拜格刀具套装菜刀菜板家用不锈钢切片刀斩骨刀水果刀剪刀全套套刀组合 刀具6件套+木纹pp刀座', 16, '1713244165', 0, '2024-4-16 13:9:25.119356', 53);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (47, 'images/20240319/20240319140432438292_54.jpg', 1, 25.90, '优赏水果刀家用案板套装宿舍便携小刀切菜刀和菜板组合刀具辅食厨房 菜刀+水果刀+瓜刨+菜板4件套', 16, '1713244165', 0, '2024-4-16 13:9:25.119356', 54);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (48, 'images/20240314/20240314153743486989_6.jpg', 1, 32.00, '内衣裤折叠洗 衣机迷你小型自动婴儿洗衣机宿舍专用洗袜子神器便携', 16, '1713271554', 0, '2024-4-16 20:45:54.751187', 6);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (49, 'images/20240314/20240314155350535025_22.jpg', 1, 148.00, '空调扇移动 小空调家用静音制冷小空调不加水卧室小型一体机电风扇', 16, '1713271554', 0, '2024-4-16 20:45:54.751187', 22);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (50, 'images/20240314/20240314160228548780_32.jpg', 1, 69.90, '正品半球3500W大功率电磁炉家用 爆炒防水触摸火锅多功能套装炉灶', 16, '1713271554', 0, '2024-4-16 20:45:54.751187', 32);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (51, 'images/20240314/20240314153632175277_5.jpg', 2, 418.00, '中国扬子电器出品洗衣机全自动家用10KG小型出租房屋宿舍洗脱一体', 4, '1713273195', 0, '2024-4-16 21:13:15.974529', 5);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (52, 'images/20240319/20240319140432438292_54.jpg', 3, 25.90, '优赏水果刀家用案板套装宿舍便携小刀切菜刀和菜板组合刀具辅食厨房 菜刀+水果刀+瓜刨+菜板4件套', 4, '1713273195', 0, '2024-4-16 21:13:15.974529', 54);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (53, 'images/20240314/20240314162103892166_45.jpg', 1, 11.70, '围炉煮茶烧烤火炉子聚全套装工器具桌炭火盆户外家庭用室内冬天日', 4, '1713273346', 0, '2024-4-16 21:15:46.468748', 45);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (54, 'images/20240314/20240314162155450433_46.jpg', 1, 160.00, '虹润配电器 模拟量输出4-20mA隔离器一进二出分配信号隔离模块M23', 4, '1713273346', 0, '2024-4-16 21:15:46.468748', 46);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (55, 'images/20240314/20240314160852147124_37.jpg', 1, 99.00, '抽烟机家用厨房大吸力农村抽油烟机商用强力柴火灶土灶用吸油机', 4, '1713273410', 0, '2024-4-16 21:16:50.869109', 37);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (56, 'images/20240314/20240314161835448087_42.jpg', 1, 198.00, '暖风机取暖 器家用节能省电石墨烯电加热冬天暖气办公室浴室烤火炉', 4, '1713273410', 0, '2024-4-16 21:16:50.869109', 42);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (57, 'images/20240314/20240314161755274228_41.jpg', 3, 2880.00, '意大利水暖取暖器对流式墙暖卧室电暖气片壁挂式暖风机水电暖器', 4, '1713273424', 0, '2024-4-16 21:17:4.330095', 41);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (58, 'images/20240314/20240314162155450433_46.jpg', 2, 160.00, '虹润配电器 模拟量输出4-20mA隔离器一进二出分配信号隔离模块M23', 4, '1713273424', 0, '2024-4-16 21:17:4.330095', 46);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (59, 'images/20240314/20240314152610787951_1.jpg', 3, 330.00, '8/10kg洗衣机全自动家用租房小型波轮大容量带烘干洗烘一体12公斤', 16, '1713273555', 0, '2024-4-16 21:19:15.654217', 1);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (60, 'images/20240314/20240314154611575473_14.jpg', 3, 247.00, '智能数显仪 表4-20ma导轨壁挂式数字显示温度压力水位液位控制DN10', 16, '1713273555', 0, '2024-4-16 21:19:15.654217', 14);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (61, 'images/20240314/20240314155726110084_26.jpg', 1, 1998.75, '奥克斯空调大1/1.5匹p一三级变频壁挂机式2/3匹p冷暖省电官方旗舰', 16, '1713273555', 0, '2024-4-16 21:19:15.654217', 26);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (62, 'images/20240314/20240314154611575473_14.jpg', 1, 247.00, '智能数显仪 表4-20ma导轨壁挂式数字显示温度压力水位液位控制DN10', 16, '1713341674', 0, '2024-4-17 16:14:34.202676', 14);
+INSERT INTO `fuadmin`.`mall_order_detail`(`id`,`img_url`,`product_num`,`shop_price`,`shop_name`,`user_id`,`order_number`,`is_delete`,`create_time`,`shop_id`) VALUES (63, 'images/20240319/20240319135524635240_52.jpg', 1, 29.89, '拜格 锅铲套 装不锈钢铲勺家用炒菜铲子汤勺打蛋器削皮刀厨具套装 厨具六件套', 16, '1713341674', 0, '2024-4-17 16:14:34.202676', 52);
